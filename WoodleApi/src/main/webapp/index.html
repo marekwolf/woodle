@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<h1>WOODLE</h1>
-</body>
+
+<html ng-app="tasklist">
+  <head>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+  </head>
+
+
+  <body>
+    <div class="list-group" ng-controller="TasksController as tctl">
+      
+      <div class="list-group-item" ng-repeat="task in tctl.tasks">
+        <p>
+          <textarea id="task-text-{{task.id}}" rows="4" cols="30">{{task.text}}</textarea>
+          <br>
+          <button ng-click="tctl.editTask(task.id);">edit</button>
+          <button ng-click="tctl.deleteTask(task.id);">delete</button>
+        </p>
+      </div>
+
+      <div>
+        <p>
+          <textarea id="new-task-text" rows="4" cols="30">new task</textarea>
+          <br>
+          <button ng-click="tctl.newTask();">add</button>
+        </p>
+
+      </div>
+      
+    </div>
+
+
+  </body>
 </html>

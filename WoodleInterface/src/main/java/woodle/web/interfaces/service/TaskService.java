@@ -1,6 +1,9 @@
 package woodle.web.interfaces.service;
 
+import java.util.List;
+
 import org.springframework.dao.DataAccessException;
+
 import woodle.web.entity.Task;
 
 public interface TaskService {
@@ -13,6 +16,8 @@ public interface TaskService {
 	public void deleteTask(Task task);
 	
 	public void updateTask(Task task);
+
+	public List<Task> loadTaskByTaskList(String taskList);
 	
 	
 }

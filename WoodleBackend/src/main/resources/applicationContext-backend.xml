@@ -25,22 +25,36 @@
 		<property name="locations">
 			<list>
 				<value>classpath:jdbc.properties</value>
-				<!-- <value>classpath:jdbcasterisk.properties</value> -->
 			</list>
 		</property>
 	</bean>
 
 	<bean id="mainDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
+		<!-- access -->
 		<property name="driverClass" value="${jdbcDriverClassName}" />
 		<property name="jdbcUrl" value="${jdbcUrl}" />
 		<property name="user" value="${jdbcUsername}" />
 		<property name="password" value="${jdbcPassword}" />
-		<property name="minPoolSize" value="5" />
-		<property name="maxPoolSize" value="30" />
-		<property name="maxStatements" value="50" />
-		<property name="idleConnectionTestPeriod" value="3000" />
-		<property name="maxIdleTime" value="120" />
+		<!-- pool sizing -->
+		<property name="initialPoolSize" value="3" />
+		<property name="minPoolSize" value="6" />
+		<property name="maxPoolSize" value="25" />
+		<property name="acquireIncrement" value="3" />
+		<property name="maxStatements" value="0" />
+		<!-- retries -->
+		<property name="acquireRetryAttempts" value="30" />
+		<property name="acquireRetryDelay" value="1000" /> <!-- 1s -->
+		<property name="breakAfterAcquireFailure" value="false" />
+		<!-- refreshing connections -->
+		<property name="maxIdleTime" value="180" /> <!-- 3min -->
+		<property name="maxConnectionAge" value="10" /> <!-- 1h -->
+		<!-- timeouts and testing -->
+		<property name="checkoutTimeout" value="5000" /> <!-- 5s -->
+		<property name="idleConnectionTestPeriod" value="60" /><!-- 60 -->
+		<property name="testConnectionOnCheckout" value="true" />
+		<property name="preferredTestQuery" value="SELECT 1" />
+		<property name="testConnectionOnCheckin" value="true" />
 	</bean>
 
 	<bean id="dataSource"
@@ -59,11 +73,6 @@
 
 	<bean id="taskService" class="woodle.web.service.TaskServiceImpl" />
 
-	<!-- <bean id="transactionManager" -->
-	<!-- class="org.springframework.orm.hibernate4.HibernateTransactionManager"> -->
-	<!-- <property name="sessionFactory" ref="sessionFactory" /> -->
-	<!-- </bean> -->
-
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
@@ -71,14 +80,14 @@
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.ppz.web" />
+		<property name="packagesToScan" value="woodle.web" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.dialect"> org.hibernate.dialect.H2Dialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>

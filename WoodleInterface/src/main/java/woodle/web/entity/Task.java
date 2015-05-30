@@ -21,15 +21,13 @@ public class Task implements Serializable {
 
 	private String text;
 
-	
-
-
 	private int priority;
-	/**
-	 * preferovana lokalizace
-	 */
-	private String locale;
-
+	
+	private String taskList;
+	
+	private boolean isDone;
+	
+	
 	public String getText() {
 		return text;
 	}
@@ -38,14 +36,7 @@ public class Task implements Serializable {
 		this.text = text;
 	}
 	
-	public String getLocale() {
-		return locale;
-	}
-
-	public void setLocale(String locale) {
-		this.locale = locale;
-	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -54,18 +45,33 @@ public class Task implements Serializable {
 		this.id = id;
 	}
 	
-	public void getPriority(int priority){
-		this.priority = priority;
+	public int getPriority(){
+		return priority;
 	}
 	
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
 
+	public String getTaskList() {
+		return taskList;
+	}
+
+	public void setTaskList(String taskList) {
+		this.taskList = taskList;
+	}
+
+	public boolean getIsDone() {
+		return isDone;
+	}
+
+	public void setIsDone(boolean isDone) {
+		this.isDone = isDone;
+	}
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", text=" + text + ", locale=" + locale + ", priotity=" + priority + "]";
+		return "User [id=" + id + ", text=" + text + ", priotity=" + priority + ", isDone" + isDone + "]";
 	}
 
 }

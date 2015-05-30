@@ -1,5 +1,7 @@
 package woodle.web.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,11 @@ public class TaskServiceImpl implements TaskService{
 	public void updateTask(Task task) {
 		taskRepository.updateTask(task);
 		
+	}
+
+	@Override
+	public List<Task> loadTaskByTaskList(String taskList) {
+		return taskRepository.loadTasksbyTaskList(taskList);
 	}
 
 }
