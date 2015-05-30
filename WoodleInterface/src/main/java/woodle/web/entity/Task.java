@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
-
 @Entity
 @Table(name = "TASK")
 public class Task implements Serializable {
@@ -22,12 +21,11 @@ public class Task implements Serializable {
 	private String text;
 
 	private int priority;
-	
+
 	private String taskList;
-	
+
 	private boolean isDone;
-	
-	
+
 	public String getText() {
 		return text;
 	}
@@ -35,8 +33,7 @@ public class Task implements Serializable {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -44,11 +41,11 @@ public class Task implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public int getPriority(){
+
+	public int getPriority() {
 		return priority;
 	}
-	
+
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
@@ -68,10 +65,11 @@ public class Task implements Serializable {
 	public void setIsDone(boolean isDone) {
 		this.isDone = isDone;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", text=" + text + ", priotity=" + priority + ", isDone" + isDone + "]";
+		return "User [id=" + id + ", text=" + text + ", priotity=" + priority
+				+ ", isDone" + isDone + "]";
 	}
 
 }
